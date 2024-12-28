@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './components/home';
+import Home from './components/Home';
 import Projects from './components/Project';
 import ThemeToggle from './components/ThemeToggle';
-import Footer from './components/footer';
+import Footer from './components/Footer';
+import LanguageToggle from './components/LanguageToggle';
 import './index.css';
 
 const App = () => {
   const [theme, setTheme] = useState('dark');
+  const [language, setLanguage] = useState('en');
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -15,28 +17,29 @@ const App = () => {
 
   return (
     <Router>
-  <div className={`app ${theme}`}>
-    <header>
-      <h1>Taher&prime;s Portfolio</h1>
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      <nav>
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/projects">Projects</Link></li>
-        </ul>
-      </nav>
-    </header>
+      <div className={`app ${theme}`}>
+        <header>
+          <h1>Taher&prime;s Portfolio</h1>
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+          <LanguageToggle language={language} setLanguage={setLanguage} />
+          <nav>
+            <ul className="nav-links">
+              <li><Link to="/">{language === 'en' ? 'Home' : 'Accueil'}</Link></li>
+              <li><Link to="/projects">{language === 'en' ? 'Projects' : 'Projets'}</Link></li>
+            </ul>
+          </nav>
+        </header>
 
-    <main>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-      </Routes>
-    </main>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home language={language} />} />
+            <Route path="/projects" element={<Projects language={language} />} />
+          </Routes>
+        </main>
 
-    <Footer />
-  </div>
-</Router>
+        <Footer language={language} />
+      </div>
+    </Router>
   );
 };
 
