@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './components/home';
 import Projects from './components/Project';
 import ThemeToggle from './components/ThemeToggle';
 import Footer from './components/Footer';
